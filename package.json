@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "Apify Actor: discover Instagram reels by hashtag/profile and extract each reel's hook + full spoken script.",
   "type": "module",
-  "main": "src/main.js",
-  "scripts": {
-    "start": "node src/main.js"
-  },
+  "main": "main.js",
+"scripts": {
+  "start": "node main.js"
+}
   "dependencies": {
     "apify": "^3.2.6"
   },
