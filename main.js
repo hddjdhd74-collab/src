@@ -5,7 +5,7 @@
  * the repo runs end-to-end on Apify, but the actual scraping + transcription
  * logic is NOT implemented yet — it currently just echoes the resolved
  * input back out as a single dataset item so you can confirm the Actor
- * builds and the input form (.actor/INPUT_SCHEMA.json) works.
+ * builds and the input form (INPUT_SCHEMA.json) works.
  *
  * To make this real, wire in:
  *   1. Discovery: call an Instagram scraping source (e.g. the Apify
@@ -40,7 +40,7 @@ const {
     openaiApiKey,
 } = input;
 
-Actor.log.info('Received input', {
+console.log('Received input', {
     reelUrlsCount: reelUrls.length,
     search,
     searchType,
@@ -61,7 +61,7 @@ if (reelUrls.length === 0 && !search) {
 
 // TODO: replace this placeholder with real discovery + transcription logic.
 await Actor.pushData({
-    note: 'STUB OUTPUT — implement discovery/filtering/transcription in src/main.js',
+    note: 'STUB OUTPUT — implement discovery/filtering/transcription in main.js',
     resolvedInput: input,
 });
 
