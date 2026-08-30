@@ -1,0 +1,9 @@
+{
+  "search": "indian uncle, indian aunty, desi uncle, desi aunty, indian uncle aunty meme",
+  "searchType": "hashtag",
+  "searchLimit": 10,
+  "resultsType": "reels",
+  "resultsLimit": 1000,
+  "onlyPostsNewerThan": "6 months",
+  "skipPinnedPosts": true
+}

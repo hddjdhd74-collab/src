@@ -1,0 +1,11 @@
+{
+  "reelUrls": [
+    "https://www.instagram.com/reel/C1y8YEbPNmo/",
+    "https://www.instagram.com/reel/DJjiSsTMUwl/",
+    "https://www.instagram.com/reel/Cs_ly78JOSQ/",
+    "https://www.instagram.com/reel/DRfKHzJEhCB/",
+    "https://www.instagram.com/reel/DKvvutMyCck/"
+  ],
+  "includeTranscription": true,
+  "openaiApiKey": "REPLACE_WITH_YOUR_OPENAI_API_KEY_OR_REMOVE_THIS_LINE"
+}
