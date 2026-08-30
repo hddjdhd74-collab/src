@@ -80,7 +80,9 @@ function doubleJsonUnescape(raw) {
 }
 
 function extractShortcode(url) {
-    const m = url.match(/instagram\.com\/(?:reel|p|tv)\/([^/?]+)/);
+    // Instagram uses both singular (/reel/) and plural (/reels/) paths for
+    // the same content depending on where the link was generated.
+    const m = url.match(/instagram\.com\/(?:reels?|p|tv)\/([^/?]+)/);
     return m ? m[1] : null;
 }
 
