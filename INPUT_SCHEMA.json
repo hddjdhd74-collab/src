@@ -1,0 +1,114 @@
+{
+  "title": "Instagram Viral Reel Script & Hook Extractor",
+  "description": "Discover Instagram reels by hashtag or profile, filter to the top performers, and extract each reel's spoken transcript so you can pull out the hook (opening line) and full script.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "reelUrls": {
+      "title": "Reel URLs (optional)",
+      "type": "array",
+      "description": "Paste specific Instagram reel links to extract hooks/scripts from directly. Leave empty to discover reels automatically via Search terms below instead.",
+      "editor": "stringList",
+      "default": [],
+      "prefill": [
+        "https://www.instagram.com/reel/C1y8YEbPNmo/",
+        "https://www.instagram.com/reel/DJjiSsTMUwl/"
+      ]
+    },
+    "search": {
+      "title": "Search terms (hashtags or keywords)",
+      "type": "string",
+      "description": "Comma-separated hashtags/keywords to discover reels with, e.g. \"indian uncle, indian aunty, desi meme\". Ignored if Reel URLs above is filled in. Do not include the # symbol.",
+      "editor": "textfield",
+      "default": "indian uncle, indian aunty, desi uncle aunty meme"
+    },
+    "searchType": {
+      "title": "Search type",
+      "type": "string",
+      "description": "How to interpret the Search terms field.",
+      "editor": "select",
+      "enum": ["hashtag", "user"],
+      "enumTitles": ["Hashtag search", "Profile/username search"],
+      "default": "hashtag"
+    },
+    "resultsType": {
+      "title": "Result type",
+      "type": "string",
+      "description": "Type of content to pull from each search term.",
+      "editor": "select",
+      "enum": ["reels", "posts"],
+      "enumTitles": ["Reels only", "All posts"],
+      "default": "reels"
+    },
+    "resultsLimit": {
+      "title": "Max reels per search term",
+      "type": "integer",
+      "description": "How many reels to pull for each hashtag/profile in Search terms. Apify bills per result and Instagram may rate-limit very large pulls, so scale up gradually (e.g. test at 50-100 before requesting thousands).",
+      "editor": "number",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "onlyPostsNewerThan": {
+      "title": "Only posts newer than",
+      "type": "string",
+      "description": "Skip reels older than this. Accepts a relative value like \"6 months\", \"30 days\", or an absolute date like \"2026-01-01\".",
+      "editor": "textfield",
+      "default": "6 months"
+    },
+    "minViews": {
+      "title": "Minimum view count filter",
+      "type": "integer",
+      "description": "Only send reels with at least this many views into transcription, so you're not paying to transcribe low-performers. Set to 0 to disable.",
+      "editor": "number",
+      "default": 100000,
+      "minimum": 0
+    },
+    "minLikes": {
+      "title": "Minimum like count filter",
+      "type": "integer",
+      "description": "Only send reels with at least this many likes into transcription. Set to 0 to disable.",
+      "editor": "number",
+      "default": 0,
+      "minimum": 0
+    },
+    "skipPinnedPosts": {
+      "title": "Skip pinned posts",
+      "type": "boolean",
+      "description": "Exclude posts a profile has pinned to the top of their grid (only applies to profile/username search).",
+      "editor": "checkbox",
+      "default": true
+    },
+    "includeTranscription": {
+      "title": "Extract transcript (hook + script)",
+      "type": "boolean",
+      "description": "Transcribe each reel's spoken audio to text. The transcript's opening sentence is the \"hook\"; the full transcript is the \"script\". Turning this off returns only captions and engagement stats.",
+      "editor": "checkbox",
+      "default": true
+    },
+    "hookLengthSeconds": {
+      "title": "Hook length (seconds)",
+      "type": "integer",
+      "description": "How many seconds from the start of the transcript to treat as the \"hook\" line, separate from the rest of the script.",
+      "editor": "number",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 10
+    },
+    "openaiApiKey": {
+      "title": "OpenAI API key (for transcription)",
+      "type": "string",
+      "description": "Required if Extract transcript is on — used to call OpenAI's Whisper transcription API. Get one from platform.openai.com. There is no built-in fallback key.",
+      "editor": "textfield",
+      "isSecret": true
+    },
+    "igSessionId": {
+      "title": "Instagram session ID (optional, for hashtag/profile discovery)",
+      "type": "string",
+      "description": "Only needed if Reel URLs is empty and you're using Search terms to discover reels. Instagram blocks anonymous access to hashtag/profile pages, so discovery requires a logged-in session's \"sessionid\" cookie value (from your browser's dev tools while logged into Instagram). Even with this, discovery is best-effort and may be blocked. Not needed if you paste specific Reel URLs instead.",
+      "editor": "textfield",
+      "isSecret": true
+    }
+  },
+  "required": []
+}
