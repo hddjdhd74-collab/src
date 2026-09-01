@@ -106,6 +106,16 @@ async function fetchReelMetadata(url) {
     }
     const html = await res.text();
 
+    // TEMP DIAGNOSTIC — remove once we've confirmed what Instagram is
+    // actually serving to Apify's container. Logs only for the first URL
+    // processed so the log doesn't get flooded across a whole batch.
+    if (!globalThis.__loggedSample) {
+        globalThis.__loggedSample = true;
+        console.log(`DIAGNOSTIC for ${embedUrl}: status=${res.status}, htmlLength=${html.length}`);
+        console.log(`DIAGNOSTIC html head: ${html.slice(0, 500).replace(/\n/g, ' ')}`);
+        console.log(`DIAGNOSTIC contains 'video_url': ${html.includes('video_url')}, contains 'edge_media_to_caption': ${html.includes('edge_media_to_caption')}, contains 'login': ${html.toLowerCase().includes('login')}, contains 'captcha': ${html.toLowerCase().includes('captcha')}, contains 'Sorry, this page': ${html.includes('Sorry, this page')}`);
+    }
+
     const videoUrlMatch = html.match(/\\"video_url\\":\\"(.*?)\\"/);
     const captionMatch = html.match(
         /\\"edge_media_to_caption\\":\{\\"edges\\":\[\{\\"node\\":\{\\"text\\":\\"(.*?)\\"\}\}/,
