@@ -93,9 +93,15 @@ async function fetchReelMetadata(url) {
         return null;
     }
 
-    const res = await fetch(url, { headers: igHeaders() });
+    // Fetch the "embed" variant of the page, not the URL as given. Instagram's
+    // regular reel page is a client-rendered React app with no data in the
+    // server HTML; the embed page is the one that actually ships caption,
+    // engagement counts, and (when not copyright-blocked) the video_url in
+    // its server-rendered HTML — which is what all the regexes below expect.
+    const embedUrl = `https://www.instagram.com/reel/${shortcode}/embed/captioned/`;
+    const res = await fetch(embedUrl, { headers: igHeaders() });
     if (!res.ok) {
-        console.warn(`Fetching ${url} returned HTTP ${res.status} — skipping.`);
+        console.warn(`Fetching ${embedUrl} returned HTTP ${res.status} — skipping.`);
         return null;
     }
     const html = await res.text();
